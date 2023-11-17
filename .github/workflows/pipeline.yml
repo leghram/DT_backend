@@ -52,9 +52,3 @@ jobs:
         run: |
           source venv/bin/activate
           pytest
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-coverage-report
-          path: htmlcov
