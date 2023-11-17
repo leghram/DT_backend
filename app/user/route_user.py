@@ -1,6 +1,4 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from app.conection.db_client_provider import SesionProvider
+from fastapi import APIRouter
 from app.user.service_user import UserService
 from app.user.repository_user import UserRepository
 
@@ -11,5 +9,5 @@ router = APIRouter(prefix="/apiv1/users", tags=["users"])
 
 
 @router.get("/")
-async def read_users(session: Session = Depends(SesionProvider)):
+async def read_users():
     return user_service.get()
