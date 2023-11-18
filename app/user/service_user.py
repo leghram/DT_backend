@@ -38,6 +38,17 @@ class UserService:
         user_created = UserSchema.model_validate(self.__repository.read_last())
         return user_created
 
+    def update(self, id, user):
+        current_user = self.__repository.read_user_by_id(id)
+        if current_user is None:
+            return
+        for key, value in user.__dict__.items():
+            if value is None:
+                continue
+            setattr(current_user, key, value)
+        user_updated = self.__repository.update(current_user)
+        return UserSchema.model_validate(user_updated)
+
     def delete(self, user_id):
         user_db = self.__repository.read_user_by_id(user_id)
         if user_db is None:

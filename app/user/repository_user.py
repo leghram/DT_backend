@@ -19,6 +19,12 @@ class UserRepository:
         self.__session.refresh(user)
         return user
 
+    def update(self, user: User):
+        self.__session.add(user)
+        self.__session.commit()
+        self.__session.refresh(user)
+        return user
+
     def remove(self, user):
         self.__session.delete(user)
         self.__session.commit()

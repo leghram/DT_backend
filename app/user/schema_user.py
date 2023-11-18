@@ -18,6 +18,10 @@ class User(BaseSchema):
     username: str
 
 
+class UserUpdate(User):
+    password: Optional[str] = None
+
+
 class UserLogin(User):
     password: str
 
