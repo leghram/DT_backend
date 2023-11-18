@@ -7,7 +7,15 @@ class BaseSchema(BaseModel):
 
 
 class User(BaseSchema):
-    id: str
-    name: str
-    email: str
-    password: Optional[str] = ""
+    id: Optional[int] = None
+    nombre: str
+    apellido: str
+    username: str
+
+
+class UserLogin(User):
+    password: str
+
+
+class UserDB(User):
+    hash_password: str
