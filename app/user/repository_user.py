@@ -12,3 +12,11 @@ class UserRepository:
     def read(self):
         users = self.__session.query(User).all()
         return users
+
+    def create(self, user: User):
+        self.__session.add(user)
+        return user
+
+    def read_last(self):
+        user = self.__session.query(User).order_by(User.id.desc()).first()
+        return user
