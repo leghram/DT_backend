@@ -21,7 +21,9 @@ class SesionProvider:
     def __new__(cls):
         if SesionProvider.__session is None:
             SesionProvider.__engine = create_engine(url_object, echo=True)
-            SesionProvider.__sesion_maker = sessionmaker(bind=SesionProvider.__engine)
+            SesionProvider.__sesion_maker = sessionmaker(
+                autocommit=False, autoflush=False, bind=SesionProvider.__engine
+            )
             SesionProvider.__session = SesionProvider.__sesion_maker()
         return SesionProvider.__session
 
