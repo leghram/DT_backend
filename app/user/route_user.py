@@ -19,6 +19,11 @@ async def create_user(user: UserLogin):
     return user_service.add(user)
 
 
-@router.post("/{id}")
+@router.get("/{id}/")
 async def read_user_by_id(id: int):
     return user_service.get_by_id(id)
+
+
+@router.delete("/{id}/")
+async def delete_user(id: int):
+    return user_service.delete(id)

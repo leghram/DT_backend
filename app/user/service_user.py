@@ -38,6 +38,13 @@ class UserService:
         user_created = UserSchema.model_validate(self.__repository.read_last())
         return user_created
 
+    def delete(self, user_id):
+        user_db = self.__repository.read_user_by_id(user_id)
+        if user_db is None:
+            return None
+        self.__repository.remove(user_db)
+        return {"status": "success"}
+
     def get_by_id(self, id: int):
         user_db = self.__repository.read_user_by_id(id)
         if user_db is None:

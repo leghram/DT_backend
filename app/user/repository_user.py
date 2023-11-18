@@ -19,6 +19,10 @@ class UserRepository:
         self.__session.refresh(user)
         return user
 
+    def remove(self, user):
+        self.__session.delete(user)
+        self.__session.commit()
+
     def read_last(self):
         user = self.__session.query(User).order_by(User.id.desc()).first()
         return user
