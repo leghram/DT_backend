@@ -26,3 +26,7 @@ class UserRepository:
     def read_user_by_username(self, username):
         user = self.__session.query(User).filter(User.username == username).first()
         return user
+
+    def read_user_by_id(self, id):
+        user = self.__session.query(User).filter(User.id == id).first()
+        return user

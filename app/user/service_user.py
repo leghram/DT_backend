@@ -37,3 +37,9 @@ class UserService:
         self.__repository.create(user_model)
         user_created = UserSchema.model_validate(self.__repository.read_last())
         return user_created
+
+    def get_by_id(self, id: int):
+        user_db = self.__repository.read_user_by_id(id)
+        if user_db is None:
+            return None
+        return UserSchema.model_validate(user_db)

@@ -17,3 +17,8 @@ async def read_users():
 @router.post("/")
 async def create_user(user: UserLogin):
     return user_service.add(user)
+
+
+@router.post("/{id}")
+async def read_user_by_id(id: int):
+    return user_service.get_by_id(id)
