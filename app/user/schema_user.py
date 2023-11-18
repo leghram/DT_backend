@@ -6,6 +6,11 @@ class BaseSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class UserAuth(BaseSchema):
+    username: str
+    password: str
+
+
 class User(BaseSchema):
     id: Optional[int] = None
     nombre: str

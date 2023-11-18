@@ -15,8 +15,14 @@ class UserRepository:
 
     def create(self, user: User):
         self.__session.add(user)
+        self.__session.commit()
+        self.__session.refresh(user)
         return user
 
     def read_last(self):
         user = self.__session.query(User).order_by(User.id.desc()).first()
+        return user
+
+    def read_user_by_username(self, username):
+        user = self.__session.query(User).filter(User.username == username).first()
         return user

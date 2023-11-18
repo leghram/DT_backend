@@ -22,6 +22,14 @@ class UserService:
         users_mapped = [UserSchema.model_validate(user) for user in users]
         return users_mapped
 
+    def get_by_username(self, username, password):
+        user_db = self.__repository.read_user_by_username(username)
+        if user_db is None:
+            return None
+        if user_db.username == username and pwd_context.verify(password, user_db.hash_password):
+            return UserSchema.model_validate(user_db)
+        return None
+
     def add(self, user: UserLogin):
         user_db = UserDB(**user.__dict__, hash_password="")
         user_db.hash_password = get_password_hashed(user.password)
