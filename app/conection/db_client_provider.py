@@ -2,6 +2,9 @@ from sqlalchemy import URL, create_engine
 from sqlalchemy.orm import sessionmaker
 from app.utils.config import DB_CONFIG
 
+import ssl
+
+ssl_context = ssl.SSLContext()
 
 url_object = URL.create(
     "postgresql+pg8000",
@@ -20,7 +23,9 @@ class SesionProvider:
 
     def __new__(cls):
         if SesionProvider.__session is None:
-            SesionProvider.__engine = create_engine(url_object, echo=True)
+            SesionProvider.__engine = create_engine(
+                url_object, echo=True, connect_args={"ssl_context": ssl_context}
+            )
             SesionProvider.__sesion_maker = sessionmaker(
                 autocommit=False, autoflush=False, bind=SesionProvider.__engine
             )
