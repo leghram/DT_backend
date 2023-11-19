@@ -10,6 +10,7 @@ from app.user.service_user import UserService
 from app.user.repository_user import UserRepository
 
 from app.utils.handler_token import create_access_token
+from app.utils.middleware import CustomMiddleware
 
 user_repo = UserRepository()
 user_service = UserService(user_repo)
@@ -26,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.add_middleware(CustomMiddleware)
 
 app.include_router(user_router)
 
