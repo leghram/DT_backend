@@ -25,3 +25,13 @@ class DB_CONFIG:
     @staticmethod
     def get_port():
         return os.getenv("DB_PORT")
+
+
+class TOKEN_CONFIG:
+    @staticmethod
+    def get_secret_key():
+        return os.getenv("API_SECRET_KEY")
+
+    @staticmethod
+    def get_algorithm():
+        return os.getenv("API_ALGORITHM")
